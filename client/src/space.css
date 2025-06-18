@@ -1,0 +1,220 @@
+/* Space theme styling */
+
+/* Base space background */
+.bg-space {
+  background-color: #000;
+  background-image: radial-gradient(circle at center, #0a0a26 0%, #000 100%);
+}
+
+/* Star animations */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+@keyframes pan {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes thruster-pulse {
+  0% { opacity: 0.7; transform: scaleX(0.8); }
+  50% { opacity: 1; transform: scaleX(1.2); }
+  100% { opacity: 0.7; transform: scaleX(0.8); }
+}
+
+@keyframes boost-particle {
+  0% { 
+    transform: translateX(0);
+    opacity: 0.8;
+  }
+  100% { 
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+}
+
+/* Raspberry Pi optimization classes */
+.fullscreen-mode .stars-small {
+  animation-duration: 180s !important; /* Slower animation for Pi */
+}
+
+.fullscreen-mode .stars-medium {
+  animation-duration: 150s !important; /* Slower animation for Pi */
+}
+
+.fullscreen-mode .stars-large {
+  animation-duration: 120s !important; /* Slower animation for Pi */
+}
+
+.fullscreen-mode .boost-particle-0,
+.fullscreen-mode .boost-particle-1,
+.fullscreen-mode .boost-particle-2,
+.fullscreen-mode .boost-particle-3,
+.fullscreen-mode .boost-particle-4 {
+  animation-duration: 1s !important; /* Slower particle animations for Pi */
+}
+
+/* Display HAT Mini specific styles */
+.display-hat-mini {
+  font-size: 0.85rem; /* Slightly smaller base font */
+}
+
+/* Smaller, simpler star field for Display HAT Mini */
+.stars-small-hat {
+  background-image: radial-gradient(1px 1px at 40px 70px, white, rgba(0,0,0,0)),
+                   radial-gradient(1px 1px at 90px 40px, white, rgba(0,0,0,0));
+  background-size: 150px 150px;
+  animation: pan 150s linear infinite;
+}
+
+.stars-medium-hat {
+  background-image: radial-gradient(1.2px 1.2px at 70px 50px, #7cf, rgba(0,0,0,0)),
+                   radial-gradient(1.2px 1.2px at 130px 90px, #ffa, rgba(0,0,0,0));
+  background-size: 200px 200px;
+  animation: pan 120s linear infinite;
+}
+
+/* Display HAT Mini (320x240) viewport optimizations */
+@media screen and (max-width: 320px), screen and (max-height: 240px) {
+  body {
+    font-size: 0.75rem;
+  }
+  
+  .stars-small, .stars-medium {
+    /* Simplified star field */
+    background-size: 150px 150px;
+  }
+  
+  /* Hide large stars for better performance */
+  .stars-large {
+    display: none;
+  }
+  
+  /* Optimize animations */
+  .thruster-0, .thruster-1, .thruster-2, .thruster-3 {
+    transition: none;
+  }
+}
+
+/* Make fonts larger on touch screens */
+@media (pointer: coarse) {
+  .card-title {
+    font-size: 1.2rem !important;
+  }
+  
+  button {
+    min-height: 2.5rem;
+  }
+}
+
+
+/* Parallax star fields */
+.stars-small, .stars-medium, .stars-large {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+}
+
+.stars-small {
+  background-image: radial-gradient(1px 1px at 20px 30px, white, rgba(0,0,0,0)),
+                   radial-gradient(1px 1px at 40px 70px, white, rgba(0,0,0,0)),
+                   radial-gradient(1px 1px at 50px 160px, white, rgba(0,0,0,0)),
+                   radial-gradient(1px 1px at 90px 40px, white, rgba(0,0,0,0)),
+                   radial-gradient(1px 1px at 130px 80px, white, rgba(0,0,0,0)),
+                   radial-gradient(1px 1px at 160px 120px, white, rgba(0,0,0,0));
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  animation: pan 120s linear infinite;
+  opacity: 0.6;
+}
+
+.stars-medium {
+  background-image: radial-gradient(1.5px 1.5px at 50px 160px, #7cf, rgba(0,0,0,0)),
+                   radial-gradient(1.5px 1.5px at 90px 40px, #afc, rgba(0,0,0,0)),
+                   radial-gradient(1.5px 1.5px at 130px 80px, #fcf, rgba(0,0,0,0)),
+                   radial-gradient(1.5px 1.5px at 160px 120px, #ffa, rgba(0,0,0,0));
+  background-repeat: repeat;
+  background-size: 300px 300px;
+  animation: pan 90s linear infinite;
+  opacity: 0.7;
+}
+
+.stars-large {
+  background-image: radial-gradient(2px 2px at 100px 50px, white, rgba(0,0,0,0)),
+                   radial-gradient(2px 2px at 200px 150px, white, rgba(0,0,0,0)),
+                   radial-gradient(2px 2px at 300px 250px, white, rgba(0,0,0,0)),
+                   radial-gradient(2px 2px at 400px 350px, white, rgba(0,0,0,0));
+  background-repeat: repeat;
+  background-size: 500px 500px;
+  animation: pan 60s linear infinite;
+  opacity: 0.8;
+}
+
+/* Thruster animation */
+.thruster-0 {
+  transform: scaleX(0.8);
+  opacity: 0.7;
+}
+
+.thruster-1 {
+  transform: scaleX(1);
+  opacity: 0.9;
+}
+
+.thruster-2 {
+  transform: scaleX(1.2);
+  opacity: 1;
+}
+
+.thruster-3 {
+  transform: scaleX(0.9);
+  opacity: 0.8;
+}
+
+/* Boost particles */
+.boost-particle-0, .boost-particle-1, .boost-particle-2, .boost-particle-3, .boost-particle-4 {
+  animation: boost-particle 0.5s linear infinite;
+}
+
+/* Terminal/CRT screen effect */
+.terminal-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.terminal-effect::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(to bottom, 
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%);
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* Retro scanline effect */
+.scanline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 0, 0, 0.1) 51%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.15;
+}
